@@ -20,7 +20,7 @@ class ArmCommander(Node):
 
     def send_trajectory(self):
         msg = JointTrajectory()
-        msg.joint_names = ['joint_1', 'joint_2', 'joint_3', 'joint_4']
+        msg.joint_names = ['joint_1', 'joint_2', 'joint_3', 'joint_4', 'joint_5']
 
         point = JointTrajectoryPoint()
 
@@ -32,8 +32,9 @@ class ArmCommander(Node):
         joint_2 = self.center_angle + self.radius * math.cos(theta)
         joint_3 = self.center_angle + self.radius * math.sin(theta)
         joint_4 = 0.0  # optional: add twist or end-effector orientation
+        joint_5 = 0.0
 
-        point.positions = [joint_1, joint_2, joint_3, joint_4]
+        point.positions = [joint_1, joint_2, joint_3, joint_4, joint_5]
         point.time_from_start.sec = 1
         point.time_from_start.nanosec = 0
 

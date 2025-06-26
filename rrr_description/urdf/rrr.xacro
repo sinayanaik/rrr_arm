@@ -277,9 +277,38 @@
     </gazebo>
 
     <joint name="joint_3" type="revolute">
-        <origin xyz="${radius_3 + radius_4} 0.0 ${length_3 - radius_3}" rpy="0.0 0.0 0.0" />
+        <origin xyz="${radius_3 + radius_3} 0.0 ${length_3 - radius_3}" rpy="0.0 0.0 0.0" />
         <parent link="link_2" />
         <child link="link_3" />
+        <axis xyz="1.0 0.0 0.0" />
+        <limit lower="0.0" upper="${M_PI * 2}" effort="300.0" velocity="1.0" />
+    </joint>
+
+    <!--link_3-->
+    <link name="link_3">
+        <xacro:inertial_block mass="${mass_3}" length="${length_3}" radius="${radius_3}" />
+        <visual>
+            <origin xyz="0.0 0.0 ${length_3/2.0}" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <cylinder radius="${radius_3}" length="${length_3}" />
+            </geometry>
+            <material name="Grey" />
+        </visual>
+
+        <collision>
+            <origin xyz="0.0 0.0 ${length_3/2.0}" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <cylinder radius="${radius_3}" length="${length_3}" />
+            </geometry>
+        </collision>
+    </link>
+
+    <xacro:gazebo_grey_link_color_block link_name="link_3" />
+
+    <joint name="joint_4" type="revolute">
+        <origin xyz="${radius_3 + radius_4} 0.0 ${length_3 - radius_3}" rpy="0.0 0.0 0.0" />
+        <parent link="link_3" />
+        <child link="link_4" />
         <axis xyz="1.0 0.0 0.0" />
         <limit lower="0.0" upper="${M_PI * 2}" effort="300.0" velocity="1.0" />
     </joint>
@@ -304,19 +333,19 @@
         </collision>
     </link>
 
-    <xacro:gazebo_grey_link_color_block link_name="link_3" />
+    <xacro:gazebo_grey_link_color_block link_name="link_4" />
 
-    <joint name="joint_4" type="revolute">
+    <joint name="joint_5" type="revolute">
         <origin xyz="0.0 0.0 ${length_4}" rpy="0.0 0.0 0.0" />
-        <parent link="link_3" />
-        <child link="link_4" />
-        <axis xyz="0.0 0.0 01.0" />
+        <parent link="link_4" />
+        <child link="link_5" />
+        <axis xyz="0.0 0.0 1.0" />
         <limit lower="0.0" upper="${M_PI * 2}" effort="300.0" velocity="1.0" />
     </joint>
 
     <!--=============================================================================-->
-    <!--link_4-->
-    <link name="link_4">
+    <!--link_5-->
+    <link name="link_5">
         <xacro:inertial_block mass="${mass_5}" length="${length_5}" radius="${radius_5}" />
         <visual>
             <origin xyz="0.0 0.0 ${radius_5/2.0}" rpy="0.0 ${M_PI/2.0} 0.0" />
@@ -334,11 +363,11 @@
         </collision>
     </link>
 
-    <xacro:gazebo_grey_link_color_block link_name="link_4" />
+    <xacro:gazebo_grey_link_color_block link_name="link_5" />
 
     <joint name="gripper_joint_1" type="prismatic">
         <origin xyz="0.0 0.0 ${radius_5 + length_6/2.0}" rpy="0.0 0.0 0.0" />
-        <parent link="link_4" />
+        <parent link="link_5" />
         <child link="gripper_link_1" />
         <axis xyz="1.0 0.0 0.0" />
         <limit lower="${radius_6/2.0}" upper="0.05" effort="100.0" velocity="1.0" />
@@ -346,7 +375,7 @@
 
     <joint name="gripper_joint_2" type="prismatic">
         <origin xyz="0.0 0.0 ${radius_5 + length_6/2.0}" rpy="0.0 0.0 0.0" />
-        <parent link="link_4" />
+        <parent link="link_5" />
         <child link="gripper_link_2" />
         <axis xyz="1.0 0.0 0.0" />
         <limit lower="-0.05" upper="${-radius_6/2.0}" effort="100.0" velocity="1.0" />
@@ -354,7 +383,7 @@
 
     <joint name="gripper_frame_joint" type="fixed">
         <origin xyz="0.0 0.0 ${radius_5*2 + length_6/2 + 0.01}" rpy="0.0 0.0 0.0" />
-        <parent link="link_4" />
+        <parent link="link_5" />
         <child link="gripper_frame_cp" />
     </joint>
     <!--=============================================================================-->

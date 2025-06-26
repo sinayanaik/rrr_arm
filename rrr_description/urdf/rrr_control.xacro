@@ -40,6 +40,14 @@
             <state_interface name="position" />
         </joint>
 
+        <joint name="joint_5">
+            <command_interface name="position">
+                <param name="min">0.0</param>
+                <param name="max">6.28</param>
+            </command_interface>
+            <state_interface name="position" />
+        </joint>
+
         <joint name="gripper_joint_1">
             <command_interface name="position">
                 <param name="min">0.01</param>
